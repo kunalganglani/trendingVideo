@@ -12,11 +12,12 @@ export class YoutubeService {
     const params = {
       part: 'snippet,statistics',
       chart: 'mostPopular',
-      regionCode: countryCode, // should be replaced with country code from countryList
+      regionCode: countryCode, // country code coming as query parameter
       maxResults: '24',
       key: config.youtubeApi.key
     };
 
+    // optimized service to get all the data in only 1 axios get call for the videos
     return axios.get('/', {
       params
     }).then(function (res) {

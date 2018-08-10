@@ -1,3 +1,4 @@
+// mock response data to be used by api
 export const response = [{
     id: 'DRS_PpOrUZ4',
     title: 'Drake - In My Feelings',

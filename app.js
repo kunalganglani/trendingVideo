@@ -19,7 +19,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
-const compression = require('compression');
+const compression = require('compression'); // Required Dependency for GZIP Compression
 app.use(compression()); //use compression 
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
-app.use('/js', express.static(__dirname + '/node_modules/bootstrap-select/dist/js'));
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap-select/dist/css'));
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap-select/dist/js')); // Added Bootstrap Select Dependency JS
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap-select/dist/css'));  // Added Bootstrap Select Dependency CSS
 
 app.use('/', indexRouter);
 app.use('/youtube', youtubeRouter);

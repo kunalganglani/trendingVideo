@@ -18,6 +18,7 @@ describe('Server', function () {
     chai.request(server)
       .get('/').redirects(0)
       .then(function (res) {
+        // test case to check redirection at homepage
         res.should.have.status(302);
         res.should.redirectTo('/youtube');
         done();
@@ -33,6 +34,7 @@ describe('Server', function () {
   });
   it('should open /youtube/player', (done) => {
     chai.request(server)
+    // checking with a valid video id
       .get('/youtube/kLjJD2WH5GQ?countryCode=AF')
       .end(function (err, res) {
         res.should.have.status(200);
@@ -48,6 +50,7 @@ describe('Server', function () {
       });
   });
   it('should send Error code 404, when routed to random url', () => {
+    // checking for random route to get 404
     return chai.request(server)
       .get('/random')
       .then((response) => {
@@ -58,6 +61,7 @@ describe('Server', function () {
       });
   });
   it('should handle errors with errorHandler with environment as development', () =>{
+    // Creating mock req and response to test the error handler for dev environment
     let req = {
       params: {},
       body: {},
@@ -94,6 +98,7 @@ describe('Server', function () {
     expect(JSON.stringify(res.locals.error)).to.equal(JSON.stringify({message: 'NotFoundError: Not Found'}));
   });
   it('should handle errors with errorHandler with environment as production', () =>{
+    // Creating mock req and response to test the error handler for dev environment
     let req = {
       params: {},
       body: {},
@@ -146,7 +151,7 @@ describe('Select Dropdown', function () {
     chai.request(server)
       .get('/youtube?countryCode=IN')
       .end(function (err, res) {
-        const dom = new JSDOM(`${res.text}`);
+        const dom = new JSDOM(`${res.text}`); // Testing value in html with JSDOM library
         expect((dom.window.document.querySelector("select").value)).to.equal('IN');
         done();
       });
@@ -154,6 +159,7 @@ describe('Select Dropdown', function () {
 });
 describe('Youtube Service', function () {
   it('Service should 24 trend items for any country', async () => {
+    // Using mock axios request to avoid wait time and possible request timeout
     mock
       .onGet('/', {
         params: {

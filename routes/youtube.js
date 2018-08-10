@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
   const countryCode = req.query.countryCode;
   const trends = await service.getTrendingVideos(countryCode);
   res.render('youtube/index', {
-    title: config.title,
-    videos: trends,
-    countryList: config.countryList,
-    selectedCountry: countryCode || "AF"
+    title: config.title, // app title
+    videos: trends, // vidoes that get binding in the index page
+    countryList: config.countryList, // country list coming from config object in config.json
+    selectedCountry: countryCode || "AF" // in absense of country code parameter, country code defaulted to AF. Afganistan becomes the country for 1st load
   });
 });
 
@@ -22,8 +22,8 @@ router.get('/:videoId', async (req, res) => {
   res.render('youtube/player', {
     title: config.title,
     videoId: req.params.videoId,
-    countryList: config.countryList || "AF",
-    selectedCountry: countryCode || "AF"
+    countryList: config.countryList,
+    selectedCountry: countryCode || "AF" // Selected country for the details page, defaulted to AF.
   });
 });
 
